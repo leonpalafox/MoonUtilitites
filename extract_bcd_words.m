@@ -1,4 +1,4 @@
-function [word_struct, out_mat, bcd_mat] = extract_bcd_words(new_im, bcd_matrix, barker_code, length_word, num_words, ordinal_barker, image_name)
+function [word_struct, new_row, out_mat, bcd_mat] = extract_bcd_words(new_im, bcd_matrix, barker_code, length_word, num_words, ordinal_barker, image_name)
 flat_bcd = bcd_matrix(:); %This flattens the array
 start_idx = findPattern(flat_bcd', barker_code);
 new_row = {'Filename', 'WarningAbscenceofBarker','Warning_only_1_Barker', 'Warning_not_consistent_Barker'; image_name, 0,0,0 };

@@ -17,11 +17,11 @@ length_of_word = 11;
 num_words = 17;
 register_table = cell2table(cell(1,4), 'VariableNames',{'Filename', 'WarningAbscenceofBarker','Warning_only_1_Barker', 'Warning_not_consistent_Barker'});
 %main program
-for im_idx = 6:6
+for im_idx = 1:6
     close all
     imfile = fullfile(path,images(im_idx).name);
     new_im = get_cropped_image(imfile,row_num, col_num);
-    imshow(new_im)
+    %imshow(new_im)
 
     %%
     centers = get_centers(new_im);
@@ -36,11 +36,14 @@ for im_idx = 6:6
     out_mast = [];
     dec_mast = [];
     for ordinal_idx = 1:2
-        [bcd_words, out_mat, dec_mat] = extract_bcd_words(new_im, bcd_matrix, barker_code, length_of_word, num_words, ordinal_idx, images(im_idx).name);
+        [bcd_words, new_row, out_mat, dec_mat] = extract_bcd_words(new_im, bcd_matrix, barker_code, length_of_word, num_words, ordinal_idx, images(im_idx).name);
+        if ordinal_idx == 1 %only add for the first time (theya re all the same)
+            register_table = [register_table; new_row(2,:)];
+        end
         out_mast = [out_mast;out_mat];
         dec_mast = [dec_mast; dec_mat];
         
     end    
     bcd_struct(im_idx).bcd_matrix = bcd_matrix;
-    decode_dec_mast()%This decodes the image using the tables
+    %decode_dec_mast()%This decodes the image using the tables
 end
