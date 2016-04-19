@@ -15,6 +15,7 @@ col_num = 12;
 barker_code = [0 0 0 1 1 1 0 1 1 0 1];
 length_of_word = 11;
 num_words = 17;
+register_table = cell2table(cell(1,4), 'VariableNames',{'Filename', 'WarningAbscenceofBarker','Warning_only_1_Barker', 'Warning_not_consistent_Barker'});
 %main program
 for im_idx = 6:6
     close all
@@ -35,10 +36,11 @@ for im_idx = 6:6
     out_mast = [];
     dec_mast = [];
     for ordinal_idx = 1:2
-        [bcd_words, out_mat, dec_mat] = extract_bcd_words(new_im, bcd_matrix, barker_code, length_of_word, num_words, ordinal_idx);
+        [bcd_words, out_mat, dec_mat] = extract_bcd_words(new_im, bcd_matrix, barker_code, length_of_word, num_words, ordinal_idx, images(im_idx).name);
         out_mast = [out_mast;out_mat];
         dec_mast = [dec_mast; dec_mat];
         
     end    
     bcd_struct(im_idx).bcd_matrix = bcd_matrix;
+    decode_dec_mast()%This decodes the image using the tables
 end

@@ -1,0 +1,23 @@
+function az_value = decode_dec_mast(dec_mast)
+%This function decodes the bcd using Johns tables
+%file
+filename = 'C:\Users\leon\Documents\Data\MoonData\SurveyorTables\Surveyor3.csv';
+lookup_table = readtable(filename,'ReadVariableNames',false);
+%Azimuth 1:6
+%extract azimuth
+azimuth_table = lookup_table(:,1:3);
+%cleanup table
+tf = ismissing(azimuth_table);
+azimuth_table = azimuth_table(~any(tf,2),:);
+%calibration_vals
+calib_val = mean(dec_mast(:,6));
+%azimuth_value
+azimuth_val = dec_mast(1,3);
+elevation_val = dec_mast(1,7);
+Iris_
+azimuth_lookup = 10000*azimuth_val/calib_val;
+lookup_array = azimuth_table{:,{'Var1','Var3'}};
+az_value = interp1(lookup_array(:,2),lookup_array(:,1), azimuth_lookup);
+%had to change the 18 to 28
+%had to change 54 to 59
+%had to change 7551 to 7651

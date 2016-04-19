@@ -1,11 +1,15 @@
-function [word_struct, out_mat, bcd_mat] = extract_bcd_words(new_im, bcd_matrix, barker_code, length_word, num_words, ordinal_barker)
+function [word_struct, out_mat, bcd_mat] = extract_bcd_words(new_im, bcd_matrix, barker_code, length_word, num_words, ordinal_barker, image_name)
 flat_bcd = bcd_matrix(:); %This flattens the array
 start_idx = findPattern(flat_bcd', barker_code);
+new_row = {'Filename', 'WarningAbscenceofBarker','Warning_only_1_Barker', 'Warning_not_consistent_Barker'; image_name, 0,0,0 };
 if length(start_idx)<2
     warning('Something might be wrong, there is only 1 Barker Code');
+    new_row{2,3}=1;
+    
 elseif isempty(start_idx)
     warning('I couldn not find any Barker Code');
     word_struct = [];
+    new_row{2,2}=1;
     return
 end
 colored_bcd = bcd_matrix;
