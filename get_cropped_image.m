@@ -10,7 +10,7 @@ level = graythresh(Iclean);
 BW = im2bw(Iclean,0.65);
 %%
 [centers, radii, metric] = imfindcircles(Iclean,[20 50],'ObjectPolarity','dark', 'Sensitivity', 0.8);
-viscircles(centers, radii,'EdgeColor','r');
+%viscircles(centers, radii,'EdgeColor','r');
 [right_center, index_right] = max(centers(:,1));
 %cent_edge = 785;
 cent_edge = 800;
@@ -22,9 +22,9 @@ point_in_edge_x = centers(index_right,1) - cent_edge;
 point_in_edge_y = centers(index_right,2);
 upper_x_corner = point_in_edge_x;
 upper_y_corner = point_in_edge_y - base_center;
-imshow(BW)
-rectangle('Position', [upper_x_corner, upper_y_corner, width, height], 'EdgeColor', 'r')
-viscircles(centers, radii,'EdgeColor','b');
+%imshow(BW)
+%rectangle('Position', [upper_x_corner, upper_y_corner, width, height], 'EdgeColor', 'r')
+%viscircles(centers, radii,'EdgeColor','b');
 %%
 %[origin_x, origin_y] = ginput(1);
 %[end_x, end_y] = ginput(1);

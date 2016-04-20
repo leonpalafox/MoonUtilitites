@@ -43,7 +43,10 @@ for im_idx = 1:6
         out_mast = [out_mast;out_mat];
         dec_mast = [dec_mast; dec_mat];
         
-    end    
+    end
+    if sum(diff(dec_mast,size(dec_mast,1)-1))~=0
+        register_table.Warning_not_consistent_Barker{end} = 1;
+    end
     bcd_struct(im_idx).bcd_matrix = bcd_matrix;
     %decode_dec_mast()%This decodes the image using the tables
 end

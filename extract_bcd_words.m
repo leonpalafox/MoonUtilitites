@@ -17,11 +17,11 @@ for color_idx = 1:length(start_idx)
     [x_ind, y_ind] = ind2sub(size(bcd_matrix),start_idx(color_idx));
     colored_bcd(x_ind, y_ind) = 5;
 end
-figure
-subplot(1,2,1)
-imshow(new_im)
-subplot(1,2,2)
-imagesc(colored_bcd)
+% figure
+% subplot(1,2,1)
+% imshow(new_im)
+% subplot(1,2,2)
+% imagesc(colored_bcd)
 
 %first word is the barker code
 start_idx = start_idx(ordinal_barker);
