@@ -17,7 +17,7 @@ length_of_word = 11;
 num_words = 17;
 register_table = cell2table(cell(1,4), 'VariableNames',{'Filename', 'WarningAbscenceofBarker','Warning_only_1_Barker', 'Warning_not_consistent_Barker'});
 %main program
-for im_idx = 1:6
+for im_idx = 6:6
     close all
     imfile = fullfile(path,images(im_idx).name);
     new_im = get_cropped_image(imfile,row_num, col_num);
