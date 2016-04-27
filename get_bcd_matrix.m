@@ -1,6 +1,6 @@
 function bcd_matrix = get_bcd_matrix(new_im, new_cen, edge_threshold_x, row_num, col_num)
-%imshow(new_im)
-%hold on
+imshow(new_im)
+hold on
 dynamic_cen = new_cen;
 new_cen_add = new_cen(:,1) + new_cen(:,2);
 
@@ -14,7 +14,7 @@ for col_idx=1:col_num
     temp_dyn = dynamic_cen(index_leftmost,:);
     temp_dyn_add = temp_dyn(:,1)+temp_dyn(:,2);
     [void,abs_index] = ismember(temp_dyn_add,new_cen_add);
-    %plot(dynamic_cen(index_leftmost,1),dynamic_cen(index_leftmost,2))
+    plot(dynamic_cen(index_leftmost,1),dynamic_cen(index_leftmost,2))
     column_matrix{col_idx}.index = abs_index;
     dynamic_cen(index_leftmost,:)=[];
 end
@@ -34,7 +34,7 @@ for row_idx=1:row_num
     temp_dyn = dynamic_cen(index_topmost,:);
     temp_dyn_add = temp_dyn(:,1)+temp_dyn(:,2);
     [void,abs_index] = ismember(temp_dyn_add,new_cen_add);
-    %plot(dynamic_cen(index_topmost,1),dynamic_cen(index_topmost,2))
+    plot(dynamic_cen(index_topmost,1),dynamic_cen(index_topmost,2))
     row_matrix{row_idx}.index = abs_index;
     dynamic_cen(index_topmost,:)=[];
     edge_y_old = edge_y;

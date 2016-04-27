@@ -9,7 +9,7 @@ images = dir([path,'\*.tif']);
 %imfile = 'C:\Users\leon\Dropbox\Code\Octave\MoonUtilitites\I_04_0013_c.jpg';
 %nuts and bolts
 %%
-edge_threshold_x = 22;
+edge_threshold_x = 21;
 row_num = 80;
 col_num = 12;
 barker_code = [0 0 0 1 1 1 0 1 1 0 1];
@@ -17,7 +17,7 @@ length_of_word = 11;
 num_words = 17;
 register_table = cell2table(cell(1,4), 'VariableNames',{'Filename', 'WarningAbscenceofBarker','Warning_only_1_Barker', 'Warning_not_consistent_Barker'});
 %main program
-for im_idx = 6:6
+for im_idx = 1:1
     close all
     imfile = fullfile(path,images(im_idx).name);
     new_im = get_cropped_image(imfile,row_num, col_num);
