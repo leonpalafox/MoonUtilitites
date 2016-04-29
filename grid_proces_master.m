@@ -9,9 +9,9 @@ images = dir([path,'\*.tif']);
 %imfile = 'C:\Users\leon\Dropbox\Code\Octave\MoonUtilitites\I_04_0013_c.jpg';
 %nuts and bolts
 %%
-edge_threshold_x = 21;
-row_num = 80;
-col_num = 12;
+edge_threshold_x = 24;
+row_num = 89;
+col_num = 11;
 barker_code = [0 0 0 1 1 1 0 1 1 0 1];
 length_of_word = 11;
 num_words = 17;
@@ -35,7 +35,7 @@ for im_idx = 1:1
     %%
     out_mast = [];
     dec_mast = [];
-    for ordinal_idx = 1:2
+    for ordinal_idx = 1:5
         [bcd_words, new_row, out_mat, dec_mat] = extract_bcd_words(new_im, bcd_matrix, barker_code, length_of_word, num_words, ordinal_idx, images(im_idx).name);
         if ordinal_idx == 1 %only add for the first time (theya re all the same)
             register_table = [register_table; new_row(2,:)];
