@@ -1,4 +1,4 @@
-function new_cen = get_centers(new_im)
+function new_cen = get_centers_bars(new_im)
 thresh = 400;
 min_thresh = 100;
 [B,L] = bwboundaries(new_im);
