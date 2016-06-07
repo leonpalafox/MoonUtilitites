@@ -1,8 +1,9 @@
 %create grid analysis
 clear
-path = 'C:\Users\leon\Documents\Data\MoonData';
+path = '/Volumes/Surveyor/Matlab Processed/Mission VII/VII_01/matlab_aligned';
+save_path = '/Volumes/Surveyor/Matlab Processed/Mission VII/VII_01/bcd_data';
 %filename = uigetfile(fullfile(path, '*.tif'));
-images = dir([path,'\*.tif']);
+images = dir(fullfile(path,'*.tif'));
 %imfile = fullfile(path,filename);
 %imfile = 'C:\Users\leon\Dropbox\Code\Octave\MoonUtilitites\V_07_0010_c.jpg';
 %imfile = 'C:\Users\leon\Dropbox\Code\Octave\MoonUtilitites\I_04_0027_c.jpg';
@@ -35,9 +36,9 @@ for im_idx = 1:length(images)
     [bcd_matrix, bar_code] = get_bcd_matrix_extended(new_im, centers, edge_threshold_x, row_num, col_num, bar_centers);
     csv_filename = strsplit(images(im_idx).name,'.');
     csv_filename = csv_filename(1);
-    csvwrite(fullfile('bcd_data',[csv_filename{1},'_bcd_code.csv']), bcd_matrix)
-    csvwrite(fullfile('bcd_data',[csv_filename{1},'_bar_code.csv']), bar_code)
-    fid = fopen(fullfile('bcd_data',[csv_filename{1},'_timestamp.txt']), 'w'); 
+    csvwrite(fullfile(save_path,[csv_filename{1},'_bcd_code.csv']), bcd_matrix)
+    csvwrite(fullfile(save_path,[csv_filename{1},'_bar_code.csv']), bar_code)
+    fid = fopen(fullfile(save_path,[csv_filename{1},'_timestamp.txt']), 'w'); 
     fprintf(fid, '%s', time_stamp); 
     fclose(fid);
     toc
