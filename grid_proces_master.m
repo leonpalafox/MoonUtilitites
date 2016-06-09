@@ -1,7 +1,9 @@
 %create grid analysis
 clear
-path = '/Volumes/Surveyor/Matlab Processed/Mission VII/VII_01/matlab_aligned';
-save_path = '/Volumes/Surveyor/Matlab Processed/Mission VII/VII_01/bcd_data';
+%path = '/Volumes/Surveyor/Matlab Processed/Mission VII/VII_01/matlab_aligned';
+path ='C:\Users\leon\Documents\Data\MoonData';
+%save_path = '/Volumes/Surveyor/Matlab Processed/Mission VII/VII_01/bcd_data';
+save_path = 'C:\Users\leon\Documents\Data\MoonData\bcd_data';
 %filename = uigetfile(fullfile(path, '*.tif'));
 images = dir(fullfile(path,'*.tif'));
 %imfile = fullfile(path,filename);
@@ -18,7 +20,9 @@ length_of_word = 11;
 num_words = 17;
 register_table = cell2table(cell(1,4), 'VariableNames',{'Filename', 'WarningAbscenceofBarker','Warning_only_1_Barker', 'Warning_not_consistent_Barker'});
 %main program
-for im_idx = 1:length(images)
+
+%%
+for im_idx = 8:8
     tic
     close all
     imfile = fullfile(path,images(im_idx).name);
@@ -27,12 +31,12 @@ for im_idx = 1:length(images)
 
     %imshow(new_im)
 
-    %%
+    
     [centers, bar_centers] = get_centers_bars(new_im);
 %     for cen_idx = 1:size(centers,1)
 %         text(centers(cen_idx,1), centers(cen_idx,2), num2str(cen_idx))
 %     end
-    %%
+    
     [bcd_matrix, bar_code] = get_bcd_matrix_extended(new_im, centers, edge_threshold_x, row_num, col_num, bar_centers);
     csv_filename = strsplit(images(im_idx).name,'.');
     csv_filename = csv_filename(1);

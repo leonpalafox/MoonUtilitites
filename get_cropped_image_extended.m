@@ -11,19 +11,59 @@ Iclean = imreconstruct(marker, contrastAdjusted);
 level = graythresh(Iclean);
 BW = im2bw(Iclean,0.6);
 %%
-[centers, radii, metric] = imfindcircles(Iclean,[20 50],'ObjectPolarity','dark', 'Sensitivity', 0.8);
-%viscircles(centers, radii,'EdgeColor','r');
-[right_center, index_right] = max(centers(:,1));
+[centers, radii, metric] = imfindcircles(Iclean,[20 50],'ObjectPolarity','dark', 'Sensitivity', 0.5);
+if length(radii) < 2
+    %there is only one circle
+    %check if it is the right circle or the left circle
+    dist_to_right_edge = size(BW,2) - centers(1,1);
+    dist_to_left_edge = centers(1,1);
+    if dist_to_right_edge < dist_to_left_edge
+        disp 'You only have the right dot'
+        %so we use the same as when we have two
+        cent_edge = 759; %distance from cicrle to left edge of cropping area
+        width = 400;
+        height = 1920;
+        %base to center of circle
+        base_center = 796;%distance from cicrle to top edge (same for both circles)
+        point_in_edge_x = centers(1,1) - cent_edge;
+        point_in_edge_y = centers(1,2);
+        upper_x_corner = point_in_edge_x;
+        upper_y_corner = point_in_edge_y - base_center;
+    else
+        disp 'You only have the left dot'
+        %so we use the same as when we have two
+        cent_edge = 3213; %distance from cicrle to left edge of cropping area
+        width = 400;
+        height = 1920;
+        %base to center of circle
+        base_center = 796;%distance from cicrle to top edge (same for both circles)
+        point_in_edge_x = centers(1,1) + cent_edge;
+        point_in_edge_y = centers(1,2);
+        upper_x_corner = point_in_edge_x;
+        upper_y_corner = point_in_edge_y - base_center;
+    end
+elseif length(radii)==2
+    %you have two circles so lets use the rightmost one
+    [right_center, index_right] = max(centers(:,1));
+    cent_edge = 759;
+    width = 400;
+    height = 1920;
+    %base to center of circle
+    base_center = 796;
+    point_in_edge_x = centers(index_right,1) - cent_edge;
+    point_in_edge_y = centers(index_right,2);
+    upper_x_corner = point_in_edge_x;
+    upper_y_corner = point_in_edge_y - base_center;
+else
+    msg = 'Error occurred with the number of circles, please check';
+    error(msg)
+end
+% imshow(BW)
+% hold on
+% viscircles(centers, radii,'EdgeColor','r');
+
 %cent_edge = 785;
-cent_edge = 759;
-width = 400;
-height = 1920;
-%base to center of circle
-base_center = 796;
-point_in_edge_x = centers(index_right,1) - cent_edge;
-point_in_edge_y = centers(index_right,2);
-upper_x_corner = point_in_edge_x;
-upper_y_corner = point_in_edge_y - base_center;
+
 % imshow(Iclean)
 % rectangle('Position', [upper_x_corner, upper_y_corner, width, height], 'EdgeColor', 'r')
 % viscircles(centers, radii,'EdgeColor','b');
