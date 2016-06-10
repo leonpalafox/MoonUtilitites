@@ -22,12 +22,12 @@ register_table = cell2table(cell(1,4), 'VariableNames',{'Filename', 'WarningAbsc
 %main program
 
 %%
-for im_idx = 8:8
+for im_idx = 1:length(images)
     tic
     close all
     imfile = fullfile(path,images(im_idx).name);
-    time_stamp = read_timestamp(imfile);
-    new_im = get_cropped_image_extended(imfile,row_num, col_num);
+    [time_stamp, centers, radii] = read_timestamp(imfile); %this also gives the centers and radii of the black dots
+    new_im = get_cropped_image_extended(imfile,row_num, col_num, radii, centers);
 
     %imshow(new_im)
 
