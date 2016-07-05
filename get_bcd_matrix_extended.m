@@ -34,6 +34,7 @@ for row_idx=1:row_num
         continue
     end
     index_topmost = find(dynamic_cen(:,2) < edge_threshold_y + edge_y);
+    row_idx
     bar_ind_top = find(dyn_bar_cen(:,2) < edge_threshold_y + edge_y, 1);
     %check if there is a bar
     if ~isempty(edge_y)

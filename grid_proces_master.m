@@ -22,6 +22,7 @@ register_table = cell2table(cell(1,4), 'VariableNames',{'Filename', 'WarningAbsc
 %main program
 
 %%
+break
 for im_idx = 1:length(images)
     tic
     close all
@@ -33,8 +34,10 @@ for im_idx = 1:length(images)
 
     
     [centers, bar_centers] = get_centers_bars(new_im);
-%     for cen_idx = 1:size(centers,1)
-%         text(centers(cen_idx,1), centers(cen_idx,2), num2str(cen_idx))
+%     for cen_idx = 1:size(bar_centers,1)
+%         text(bar_centers(cen_idx,1), bar_centers(cen_idx,2), num2str(cen_idx))
+%         plot(bar_centers(cen_idx,1), bar_centers(cen_idx,2), 'o')
+%         hold on
 %     end
     
     [bcd_matrix, bar_code] = get_bcd_matrix_extended(new_im, centers, edge_threshold_x, row_num, col_num, bar_centers);
