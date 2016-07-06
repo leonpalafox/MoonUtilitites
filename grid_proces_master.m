@@ -1,9 +1,9 @@
 %create grid analysis
 clear
-%path = '/Volumes/Surveyor/Matlab Processed/Mission VII/VII_01/matlab_aligned';
-path ='C:\Users\leon\Documents\Data\MoonData';
-%save_path = '/Volumes/Surveyor/Matlab Processed/Mission VII/VII_01/bcd_data';
-save_path = 'C:\Users\leon\Documents\Data\MoonData\bcd_data';
+path = '/Volumes/Surveyor/Matlab Processed/Mission VII/VII_01/matlab_aligned';
+%path ='C:\Users\leon\Documents\Data\MoonData';
+save_path = '/Volumes/Surveyor/Matlab Processed/Mission VII/VII_01/bcd_data';
+%save_path = 'C:\Users\leon\Documents\Data\MoonData\bcd_data';
 %filename = uigetfile(fullfile(path, '*.tif'));
 images = dir(fullfile(path,'*.tif'));
 %imfile = fullfile(path,filename);
@@ -22,8 +22,9 @@ register_table = cell2table(cell(1,4), 'VariableNames',{'Filename', 'WarningAbsc
 %main program
 
 %%
-break
-for im_idx = 1:length(images)
+%break
+
+for im_idx = 866:length(images)
     tic
     close all
     imfile = fullfile(path,images(im_idx).name);
