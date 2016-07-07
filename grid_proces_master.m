@@ -1,8 +1,8 @@
 %create grid analysis
 clear
-path = '/Volumes/Surveyor/Matlab Processed/Mission VII/VII_02/matlab_aligned';
+path = '/Volumes/Surveyor/Matlab Processed/Mission VII/VII_04/matlab_aligned';
 %path ='C:\Users\leon\Documents\Data\MoonData';
-save_path = '/Volumes/Surveyor/Matlab Processed/Mission VII/VII_02/bcd_data';
+save_path = '/Volumes/Surveyor/Matlab Processed/Mission VII/VII_04/bcd_data';
 %save_path = 'C:\Users\leon\Documents\Data\MoonData\bcd_data';
 %filename = uigetfile(fullfile(path, '*.tif'));
 images = dir(fullfile(path,'*.tif'));

@@ -10,7 +10,8 @@ Iclean = imreconstruct(marker, contrastAdjusted);
 level = graythresh(Iclean);
 BW = im2bw(Iclean,0.6);
 %%
-[centers, radii, metric] = imfindcircles(Iclean,[20 50],'ObjectPolarity','dark', 'Sensitivity', 0.6);
+%[centers, radii, metric] = imfindcircles(Iclean,[20 50],'ObjectPolarity','dark', 'Sensitivity', 0.6);
+[centers, radii, metric] = imfindcircles(BW,[30 70],'ObjectPolarity','dark', 'Sensitivity', 0.7);
 if length(radii) < 2
     %there is only one circle
     %check if it is the right circle or the left circle
