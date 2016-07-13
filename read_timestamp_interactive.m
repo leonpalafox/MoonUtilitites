@@ -1,4 +1,4 @@
-function [timestamp_data, centers, radii] = read_timestamp(imfile)
+function [timestamp_data, centers, radii] = read_timestamp_interactive(imfile, frame_counter)
 %now we crop the part with the text
 I = imread(imfile);
 %I = rgb2gray(I);
@@ -23,6 +23,7 @@ if length(radii) < 2
         cent_edge = 1439; %distance from cicrle to left edge of cropping area
         %base to center of circle
         base_center = 881;%distance from cicrle to top edge (same for both circles)
+        base_center = 911; %roll 4
         x_ts = centers(1,1) - cent_edge;
         y_tx = centers(1,2) - base_center;
         
@@ -32,6 +33,7 @@ if length(radii) < 2
         cent_edge = 3972-1439; %distance from cicrle to left edge of cropping area
         %base to center of circle
         base_center = 881;%distance from cicrle to top edge (same for both circles)
+        base_center = 911; %roll 4
         x_ts = centers(1,1) + cent_edge;
         y_tx = centers(1,2)-base_center;
 
@@ -42,7 +44,7 @@ elseif length(radii)==2
     cent_edge = 1439;
     %base to center of circle
     base_center = 881;
-    base_center = 841; %roll 4
+    base_center = 911; %roll 4
     x_ts = centers(index_right,1) - cent_edge;
     y_tx = centers(index_right,2) - base_center;
     
@@ -57,7 +59,29 @@ height_box = 1000;
 width_box = 64;
 new_im = imcrop(contrastAdjusted, [x_ts, y_tx, height_box, width_box]);
 %%
+%This is the interactive part
 
+if (frame_counter == 40 || frame_counter == 0)
+    imshow(imfile)
+    hold on;
+    rectangle('position', [x_ts, y_tx, height_box, width_box])
+    answer =  questdlg('Do the frame looks right?','Moon Matlab', 'Yes', 'No', 'No');
+    if strcmp(answer, 'No')
+        waitfor(msgbox('Please readjust it'));
+        new_params = getrect;
+        new_im = imcrop(contrastAdjusted, new_params);
+        x_ts = new_params(1)
+        y_tx = new_params(2)
+        height_box = new_params(3)
+        width_box = new_params(4)
+        close all
+        error('Check the log and update the numbers accordingly')
+    end
+    close all
+    frame_counter = 1;
+        
+end
+%%
 
 
 
@@ -65,6 +89,7 @@ H = fspecial('disk',1);
 blurred = imfilter(new_im,H,'replicate');
 level = graythresh(blurred);
 BW = im2bw(blurred,level);
+
 %imshow(BW);
 results = ocr(BW, 'TextLayout', 'Line', 'CharacterSet', '0123456789');
 timestamp_data = sscanf(results.Text, '%s');

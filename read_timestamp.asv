@@ -8,7 +8,7 @@ contrastAdjusted = imadjust(gather(J));
 marker = imerode(contrastAdjusted, strel('line',10,0));
 Iclean = imreconstruct(marker, contrastAdjusted);
 level = graythresh(Iclean);
-BW = im2bw(Iclean,0.45);
+BW = im2bw(Iclean,0.6);
 %%
 %[centers, radii, metric] = imfindcircles(Iclean,[20 50],'ObjectPolarity','dark', 'Sensitivity', 0.6);
 [centers, radii, metric] = imfindcircles(BW,[30 70],'ObjectPolarity','dark', 'Sensitivity', 0.7);

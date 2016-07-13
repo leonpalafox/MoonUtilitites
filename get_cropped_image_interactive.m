@@ -63,6 +63,24 @@ else
     msg = 'Error occurred with the number of circles, please check';
     error(msg)
 end
+
+if (frame_counter == 40)
+    imshow(imfile)
+    hold on;
+    rectangle('position', [upper_x_corner, upper_y_corner, width, height])
+    answer =  questdlg('Do the bcd frame looks right?','Moon Matlab', 'Yes', 'No', 'No');
+    if strcmp(answer, 'No')
+        msgbox('Please readjust it')
+        new_params = getrect;
+        new_im = imcrop(contrastAdjusted, new_params);
+        x_ts = new_params(1)
+        y_tx = new_params(2)
+        height_box = new_params(3)
+        width_box = new_params(4)
+        error('Check the log and update the numbers accordingly')
+    end
+        
+end
 % imshow(BW)
 % hold on
 % viscircles(centers, radii,'EdgeColor','r');
