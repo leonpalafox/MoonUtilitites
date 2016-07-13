@@ -1,9 +1,9 @@
 %create grid analysis
 clear
-path = '/Volumes/Surveyor/Matlab Processed/Mission VII/VII_04/matlab_aligned';
-%path ='C:\Users\leon\Documents\Data\MoonData';
-save_path = '/Volumes/Surveyor/Matlab Processed/Mission VII/VII_04/bcd_data';
-%save_path = 'C:\Users\leon\Documents\Data\MoonData\bcd_data';
+%path = '/Volumes/Surveyor/Matlab Processed/Mission VII/VII_04/matlab_aligned';
+path ='C:\Users\leon\Documents\Data\MoonData';
+%save_path = '/Volumes/Surveyor/Matlab Processed/Mission VII/VII_04/bcd_data';
+save_path = 'C:\Users\leon\Documents\Data\MoonData\bcd_data';
 %filename = uigetfile(fullfile(path, '*.tif'));
 images = dir(fullfile(path,'*.tif'));
 %imfile = fullfile(path,filename);
@@ -23,23 +23,24 @@ register_table = cell2table(cell(1,4), 'VariableNames',{'Filename', 'WarningAbsc
 
 %%
 %break
-
+frame_counter = 0;
 for im_idx = 1:length(images)
     tic
     close all
     imfile = fullfile(path,images(im_idx).name);
-    [time_stamp, centers, radii] = read_timestamp(imfile); %this also gives the centers and radii of the black dots
+    [time_stamp, centers, radii] = read_timestamp_interactive(imfile, frame_counter); %this also gives the centers and radii of the black dots
+    frame_counter = frame_counter + 1;
     new_im = get_cropped_image_extended(imfile,row_num, col_num, radii, centers);
 
     %imshow(new_im)
 
     
     [centers, bar_centers] = get_centers_bars(new_im);
-%     for cen_idx = 1:size(bar_centers,1)
-%         text(bar_centers(cen_idx,1), bar_centers(cen_idx,2), num2str(cen_idx))
-%         plot(bar_centers(cen_idx,1), bar_centers(cen_idx,2), 'o')
-%         hold on
-%     end
+    for cen_idx = 1:size(centers,1)
+        text(centers(cen_idx,1), centers(cen_idx,2), num2str(cen_idx))
+        plot(centers(cen_idx,1), centers(cen_idx,2), '+')
+        hold on
+    end
     
     [bcd_matrix, bar_code] = get_bcd_matrix_extended(new_im, centers, edge_threshold_x, row_num, col_num, bar_centers);
     csv_filename = strsplit(images(im_idx).name,'.');
