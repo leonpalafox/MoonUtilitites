@@ -13,9 +13,11 @@ BW = im2bw(Iclean,0.6);
 %prime_base_center = 796;
 %prime_base_center = 840; %roll 4
 prime_base_center = 801; %roll 5
+prime_base_center = 847; %roll 5
 %right_cent_edge = 759;
 %right_cent_edge = 770; %roll 4
 right_cent_edge = 780; %roll 5
+right_cent_edge = 769; %roll 5
 left_cent_edge = 3213;
 %%
 
@@ -54,7 +56,7 @@ elseif length(radii)==2
     [right_center, index_right] = max(centers(:,1));
     cent_edge = right_cent_edge;
     width = 400;
-    height = 1920;
+    height = 1930;
     %base to center of circle
     base_center = prime_base_center;
     point_in_edge_x = centers(index_right,1) - cent_edge;
@@ -83,5 +85,5 @@ end
 % width_box = end_x - origin_x;
 % cropped_im = imcrop(BW, [origin_x, origin_y, width_box, height_box]);
 cropped_im = imcrop(Iclean, [upper_x_corner, upper_y_corner, width, height]);
-cropped_im = im2bw(cropped_im, 0.45); %this is for roll 4
+cropped_im = im2bw(cropped_im, 0.50); %this is for roll 4
 %cropped_im = im2bw(cropped_im, 0.55);

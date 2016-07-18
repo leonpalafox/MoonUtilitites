@@ -1,6 +1,6 @@
 function [new_cen, bar_cen] = get_centers_bars(new_im)
 thresh = 400;
-min_thresh = 100;
+min_thresh = 60;
 min_bar_thresh = 1200;
 
 bar_thresh = 5000;

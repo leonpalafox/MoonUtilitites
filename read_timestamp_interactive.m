@@ -25,6 +25,7 @@ if length(radii) < 2
         base_center = 881;%distance from cicrle to top edge (same for both circles)
         base_center = 911; %roll 4
         base_center = 885;
+        base_center = 909; %roll 5
         x_ts = centers(1,1) - cent_edge;
         y_tx = centers(1,2) - base_center;
         
@@ -36,6 +37,8 @@ if length(radii) < 2
         base_center = 881;%distance from cicrle to top edge (same for both circles)
         base_center = 911; %roll 4
         base_center = 885; %roll 5
+        base_center = 909; %roll 5
+        
         x_ts = centers(1,1) + cent_edge;
         y_tx = centers(1,2)-base_center;
 
@@ -48,6 +51,8 @@ elseif length(radii)==2
     base_center = 881;
     base_center = 911; %roll 4
     base_center = 885;
+    base_center = 909;
+    
     x_ts = centers(index_right,1) - cent_edge;
     y_tx = centers(index_right,2) - base_center;
     

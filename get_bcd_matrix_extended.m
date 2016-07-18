@@ -1,11 +1,11 @@
 function [bcd_matrix, bar_code] = get_bcd_matrix_extended(new_im, new_cen, edge_threshold_x, row_num, col_num, bar_centers)
 %Add the code tor ad if there is a bar code or not
-%imshow(new_im)
-%hold on
+imshow(new_im)
+hold on
 dynamic_cen = new_cen;
 new_cen_add = new_cen(:,1) + new_cen(:,2);%this is an identifier unique_index
 
-edge_threshold_x = 22;
+edge_threshold_x = 20;
 %Make the grid
 %find elements inline with this leftmost element
 for col_idx=1:col_num
@@ -62,7 +62,7 @@ for row_idx=1:row_num
     temp_dyn = dynamic_cen(index_topmost,:);
     temp_dyn_add = temp_dyn(:,1)+temp_dyn(:,2);
     [void,abs_index] = ismember(temp_dyn_add,new_cen_add);
-    %plot(dynamic_cen(index_topmost,1),dynamic_cen(index_topmost,2),'b')
+    plot(dynamic_cen(index_topmost,1),dynamic_cen(index_topmost,2),'b')
     row_matrix{row_idx}.index = abs_index;
     dynamic_cen(index_topmost,:)=[];
     dyn_bar_cen(bar_ind_top, :) = [];
