@@ -1,4 +1,4 @@
-function [timestamp_data, centers, radii] = read_timestamp_interactive(imfile, frame_counter)
+function [timestamp_data, centers, radii, frame_counter] = read_timestamp_interactive(imfile, frame_counter)
 %now we crop the part with the text
 I = imread(imfile);
 %I = rgb2gray(I);
@@ -65,8 +65,9 @@ new_im = imcrop(contrastAdjusted, [x_ts, y_tx, height_box, width_box]);
 %This is the interactive part
 
 if (frame_counter == 40 || frame_counter == 0)
+    figure('rend','painters','pos',[10 10 1600 1000])
+    hold on
     imshow(imfile)
-    hold on;
     rectangle('position', [x_ts, y_tx, height_box, width_box])
     answer =  questdlg('Do the frame looks right?','Moon Matlab', 'Yes', 'No', 'No');
     if strcmp(answer, 'No')

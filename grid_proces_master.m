@@ -1,9 +1,9 @@
 %create grid analysis
 clear
-%path = '/Volumes/Surveyor/Matlab Processed/Mission VII/VII_04/matlab_aligned';
-path ='C:\Users\leon\Documents\Data\MoonData';
-%save_path = '/Volumes/Surveyor/Matlab Processed/Mission VII/VII_04/bcd_data';
-save_path = 'C:\Users\leon\Documents\Data\MoonData\bcd_data';
+path = '/Volumes/Surveyor/Matlab Processed/Mission VII/VII_05/matlab_aligned';
+%path ='C:\Users\leon\Documents\Data\MoonData';
+save_path = '/Volumes/Surveyor/Matlab Processed/Mission VII/VII_05/bcd_data';
+%save_path = 'C:\Users\leon\Documents\Data\MoonData\bcd_data';
 %filename = uigetfile(fullfile(path, '*.tif'));
 images = dir(fullfile(path,'*.tif'));
 %imfile = fullfile(path,filename);
@@ -24,11 +24,13 @@ register_table = cell2table(cell(1,4), 'VariableNames',{'Filename', 'WarningAbsc
 %%
 %break
 frame_counter = 0;
-for im_idx = 13:length(images)
+
+for im_idx = 569:length(images)
+
     tic
     close all
     imfile = fullfile(path,images(im_idx).name);
-    [time_stamp, centers, radii] = read_timestamp_interactive(imfile, frame_counter); %this also gives the centers and radii of the black dots
+    [time_stamp, centers, radii, frame_counter] = read_timestamp_interactive(imfile, frame_counter); %this also gives the centers and radii of the black dots
     frame_counter = frame_counter + 1;
     new_im = get_cropped_image_extended(imfile,row_num, col_num, radii, centers);
 
