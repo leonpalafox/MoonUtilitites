@@ -15,7 +15,7 @@ for col_idx=1:col_num
     temp_dyn = dynamic_cen(index_leftmost,:);
     temp_dyn_add = temp_dyn(:,1)+temp_dyn(:,2);
     [void,abs_index] = ismember(temp_dyn_add,new_cen_add);
-    plot(dynamic_cen(index_leftmost,1),dynamic_cen(index_leftmost,2), 'r')
+    %plot(dynamic_cen(index_leftmost,1),dynamic_cen(index_leftmost,2), 'r')
     column_matrix{col_idx}.index = abs_index;
     dynamic_cen(index_leftmost,:)=[];
 end

@@ -24,7 +24,7 @@ register_table = cell2table(cell(1,4), 'VariableNames',{'Filename', 'WarningAbsc
 %%
 %break
 frame_counter = 0;
-for im_idx = 1:length(images)
+for im_idx = 13:length(images)
     tic
     close all
     imfile = fullfile(path,images(im_idx).name);
