@@ -1,9 +1,9 @@
 %create grid analysis
 clear
-path = '/Volumes/Surveyor/Matlab Processed/Mission VII/VII_05/matlab_aligned';
-%path ='C:\Users\leon\Documents\Data\MoonData';
-save_path = '/Volumes/Surveyor/Matlab Processed/Mission VII/VII_05/bcd_data';
-%save_path = 'C:\Users\leon\Documents\Data\MoonData\bcd_data';
+%path = '/Volumes/Surveyor/Matlab Processed/Mission VII/VII_05/matlab_aligned';
+path ='C:\Users\leon\Documents\Data\MoonData';
+%save_path = '/Volumes/Surveyor/Matlab Processed/Mission VII/VII_05/bcd_data';
+save_path = 'C:\Users\leon\Documents\Data\MoonData\bcd_data';
 %filename = uigetfile(fullfile(path, '*.tif'));
 images = dir(fullfile(path,'*.tif'));
 %imfile = fullfile(path,filename);
@@ -22,11 +22,11 @@ register_table = cell2table(cell(1,4), 'VariableNames',{'Filename', 'WarningAbsc
 %main program
 
 %%
-%break
+break
 frame_counter = 0;
 
 
-for im_idx = 609:length(images)
+for im_idx = 1:length(images)
 
 
     tic
@@ -74,3 +74,4 @@ for im_idx = 609:length(images)
 %     bcd_struct(im_idx).bcd_matrix = bcd_matrix;
     %decode_dec_mast()%This decodes the image using the tables
 end
+e

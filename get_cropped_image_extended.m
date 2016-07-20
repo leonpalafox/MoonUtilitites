@@ -15,12 +15,14 @@ BW = im2bw(Iclean,0.6);
 prime_base_center = 801; %roll 5
 prime_base_center = 847; %roll 5
 prime_base_center = 870; %roll 5
+prime_base_center = 847; %roll 5
 
 %right_cent_edge = 759;
 %right_cent_edge = 770; %roll 4
 right_cent_edge = 780; %roll 5
 right_cent_edge = 769; %roll 5
 right_cent_edge = 773; %roll 5
+right_cent_edge = 778; %roll 5
 left_cent_edge = 3213;
 %%
 
