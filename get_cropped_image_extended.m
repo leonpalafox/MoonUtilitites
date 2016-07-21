@@ -16,6 +16,7 @@ prime_base_center = 801; %roll 5
 prime_base_center = 847; %roll 5
 prime_base_center = 870; %roll 5
 prime_base_center = 847; %roll 5
+prime_base_center = 810; %roll 5
 
 %right_cent_edge = 759;
 %right_cent_edge = 770; %roll 4
@@ -23,6 +24,8 @@ right_cent_edge = 780; %roll 5
 right_cent_edge = 769; %roll 5
 right_cent_edge = 773; %roll 5
 right_cent_edge = 778; %roll 5
+right_cent_edge = 763; %roll 5
+right_cent_edge = 779; %roll 5
 left_cent_edge = 3213;
 %%
 
@@ -36,7 +39,7 @@ if length(radii) < 2
         %so we use the same as when we have two
         cent_edge = right_cent_edge; %distance from cicrle to left edge of cropping area
         width = 400;
-        height = 1920;
+        height = 1940;
         %base to center of circle
         base_center = prime_base_center;%distance from cicrle to top edge (same for both circles)
         point_in_edge_x = centers(1,1) - cent_edge;
@@ -48,7 +51,7 @@ if length(radii) < 2
         %so we use the same as when we have two
         cent_edge = left_cent_edge; %distance from cicrle to left edge of cropping area
         width = 400;
-        height = 1920;
+        height = 1940;
         %base to center of circle
         base_center = prime_base_center;%distance from cicrle to top edge (same for both circles)
         point_in_edge_x = centers(1,1) + cent_edge;
@@ -61,7 +64,7 @@ elseif length(radii)==2
     [right_center, index_right] = max(centers(:,1));
     cent_edge = right_cent_edge;
     width = 400;
-    height = 1930;
+    height = 1940;
     %base to center of circle
     base_center = prime_base_center;
     point_in_edge_x = centers(index_right,1) - cent_edge;
@@ -90,5 +93,5 @@ end
 % width_box = end_x - origin_x;
 % cropped_im = imcrop(BW, [origin_x, origin_y, width_box, height_box]);
 cropped_im = imcrop(Iclean, [upper_x_corner, upper_y_corner, width, height]);
-cropped_im = im2bw(cropped_im, 0.50); %this is for roll 4
+cropped_im = im2bw(cropped_im, 0.45); %this is for roll 4
 %cropped_im = im2bw(cropped_im, 0.55);

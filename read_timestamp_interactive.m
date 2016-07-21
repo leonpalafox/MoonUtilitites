@@ -1,5 +1,6 @@
 function [timestamp_data, centers, radii, frame_counter] = read_timestamp_interactive(imfile, frame_counter)
 %now we crop the part with the text
+prime_base_center = 897;
 I = imread(imfile);
 %I = rgb2gray(I);
 [n_rows, n_cols] = size(I);
@@ -9,6 +10,7 @@ marker = imerode(contrastAdjusted, strel('line',10,0));
 Iclean = imreconstruct(marker, contrastAdjusted);
 level = graythresh(Iclean);
 BW = im2bw(Iclean,0.45);
+
 %%
 %[centers, radii, metric] = imfindcircles(Iclean,[20 50],'ObjectPolarity','dark', 'Sensitivity', 0.6);
 [centers, radii, metric] = imfindcircles(BW,[30 70],'ObjectPolarity','dark', 'Sensitivity', 0.7);
@@ -28,6 +30,7 @@ if length(radii) < 2
         base_center = 909; %roll 5
         base_center = 952;
         base_center = 904;
+        base_center = prime_base_center;
 
         x_ts = centers(1,1) - cent_edge;
         y_tx = centers(1,2) - base_center;
@@ -43,6 +46,7 @@ if length(radii) < 2
         base_center = 909; %roll 5
         base_center = 952;
         base_center = 904;
+        base_center = prime_base_center;
 
         x_ts = centers(1,1) + cent_edge;
         y_tx = centers(1,2)-base_center;
@@ -59,6 +63,7 @@ elseif length(radii)==2
     base_center = 909;
     base_center = 952;
     base_center = 904;
+    base_center = prime_base_center;
     
     x_ts = centers(index_right,1) - cent_edge;
     y_tx = centers(index_right,2) - base_center;
